@@ -1,71 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_festival_romania_meetup_2022/screens/homeScreen.dart';
+import 'package:flutter_festival_romania_meetup_2022/screens/splashScreen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GDG Cluj',
-      home: Scaffold(
-        backgroundColor: Colors.grey,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset('assets/gdg_cluj.png'),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Welcome to\nGDG Cluj!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Made with ❤ in',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SvgPicture.asset(
-                        'assets/flutter.svg',
-                        width: 150,
-                      )
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
+      routes: {
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/home': (context) => const HomeScreen(),
+      },
+      home: SplashScreen(),
     );
   }
 }
