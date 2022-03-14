@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_festival_romania_meetup_2022/screens/homeScreen.dart';
-import 'package:flutter_festival_romania_meetup_2022/screens/splashScreen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_festival_romania_meetup_2022/screens/events_screen.dart';
+import 'package:flutter_festival_romania_meetup_2022/screens/home_screen.dart';
+import 'package:flutter_festival_romania_meetup_2022/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/home': (context) => const HomeScreen(),
+        '/events': ((context) => const EventsScreen())
       },
       home: SplashScreen(),
     );
