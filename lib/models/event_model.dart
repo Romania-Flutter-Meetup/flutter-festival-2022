@@ -1,28 +1,30 @@
 class EventModel {
-  String? eventName;
-  String? eventDescription;
-  String? eventDate;
-  String? eventStatus;
+  String? id;
+  String? name;
+  String? description;
+  String? status;
+  String? localDate;
+  String? localTime;
+  bool? isOnlineEvent;
 
   EventModel(
-      {this.eventName,
-      this.eventDescription,
-      this.eventDate,
-      this.eventStatus});
+      {this.id,
+      this.name,
+      this.description,
+      this.status,
+      this.localDate,
+      this.localTime,
+      this.isOnlineEvent});
 
   EventModel.fromJson(Map<String, dynamic> json) {
-    eventName = json['event_name'];
-    eventDescription = json['event_description'];
-    eventDate = json['event_date'];
-    eventStatus = json['event_status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['event_name'] = eventName;
-    data['event_description'] = eventDescription;
-    data['event_date'] = eventDate;
-    data['event_status'] = eventStatus;
-    return data;
+    id = json['id'] ?? '';
+    name = json['name'] ?? '';
+    description = json['description'] ?? '';
+    status = json['status'] ?? '';
+    localDate = json['local_date'] ?? '';
+    localTime = json['local_time'] ?? '';
+    isOnlineEvent = json['is_online_event'] != null
+        ? json['is_online_event'] as bool
+        : false;
   }
 }

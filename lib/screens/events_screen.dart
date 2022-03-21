@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_festival_romania_meetup_2022/helpers/network.dart';
 import 'package:flutter_festival_romania_meetup_2022/models/event_model.dart';
+import 'package:http/http.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({Key? key}) : super(key: key);
@@ -36,36 +38,16 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   Future<void> loadData() async {
-    await Future.delayed(Duration(seconds: 5));
+    Response response = await Network.loadEvents(status: 'upcoming,past');
 
-    String json = """
-      [
-        {
-          "event_name" : "This is an event",
-          "event_description" : "This is the description of the event",
-          "event_date" : "2022-03-09 6:00 PM",
-          "event_status" : "past"
-        },
-        {
-          "event_name" : "This is an event",
-          "event_description" : "This is the description of the event",
-          "event_date" : "2022-03-10 6:00 PM",
-          "event_status" : "upcoming"
-        },
-        {
-          "event_name" : "This is an event",
-          "event_description" : "This is the description of the event",
-          "event_date" : "2022-03-10 6:00 PM",
-          "event_status" : "upcoming"
-        }
-      ]
-      """;
+    if (response.statusCode == 200) {
+      List<dynamic> events = jsonDecode(response.body);
 
-    List<dynamic> events = jsonDecode(json);
-
-    setState(() {
-      eventsObjects = events.map((e) => EventModel.fromJson(e)).toList();
-    });
+      setState(() {
+        eventsObjects = events.map((e) => EventModel.fromJson(e)).toList();
+      });
+    }
+    //TODO: treat the error
   }
 
   @override
@@ -151,7 +133,21 @@ class _EventsScreenState extends State<EventsScreen> {
                     itemCount: eventsObjects.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(eventsObjects[index].eventName ?? ''),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/event',
+                              arguments: eventsObjects[index]);
+                        },
+                        title: Text(eventsObjects[index].name ?? ''),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                                '${eventsObjects[index].localDate} ${eventsObjects[index].localTime}'),
+                            Text(
+                              'Is online: ${eventsObjects[index].isOnlineEvent == true ? "Online" : "Offline"}',
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),

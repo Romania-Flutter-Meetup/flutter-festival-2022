@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
-options: "9a1a92567da5ba281853eeb8aa848932366c22d4c906cd6a3183548b7eafb970"
-build_start_time: [1646931896, 388329029]
-build_end_time: [1646931919, 428985118]
-inputs:
-  "/Users/alexbordei/Desktop/flutter-festival-2022/macos/Flutter/GeneratedPluginRegistrant.swift": [1646931821, 935758590]
-  "/Users/alexbordei/Desktop/flutter-festival-2022/macos/Runner/AppDelegate.swift": [1646324311, 136227607]
-  "/Users/alexbordei/Desktop/flutter-festival-2022/macos/Runner/MainFlutterWindow.swift": [1646324311, 139999389]
